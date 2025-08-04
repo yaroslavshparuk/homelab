@@ -1,0 +1,47 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pihole
+  namespace: pihole
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: pihole
+      version: "2.22.2"
+      sourceRef:
+        kind: HelmRepository
+        name: pihole
+        namespace: flux-system
+      interval: 10m
+  values:
+    replicaCount: 1
+    image:
+      repository: pihole/pihole
+      tag: latest
+      pullPolicy: IfNotPresent
+    dnsHostPort:
+      enabled: true
+      port: 53
+    serviceDns:
+      type: LoadBalancer
+      port: 53
+      externalTrafficPolicy: Local
+      loadBalancerIP: 192.168.1.201
+    serviceWeb:
+      http:
+        enabled: true
+        port: 80
+      type: ClusterIP
+    persistentVolumeClaim:
+      enabled: true
+      size: 500Mi
+    adminPassword: "your-secure-password" # Replace with a strong password
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      hosts:
+        - host: pihole.local
+          paths:
+            - path: /
+              pathType: Prefix
