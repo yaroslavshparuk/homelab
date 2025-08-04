@@ -17,7 +17,7 @@ spec:
     replicaCount: 1
     image:
       repository: pihole/pihole
-      tag: "latest"
+      tag: "2025.08.0"
       pullPolicy: IfNotPresent
     dnsHostPort:
       enabled: false
