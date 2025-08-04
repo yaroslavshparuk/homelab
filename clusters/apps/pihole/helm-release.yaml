@@ -19,6 +19,8 @@ spec:
       repository: pihole/pihole
       tag: "latest"
       pullPolicy: IfNotPresent
+    nodeSelector:
+      kubernetes.io/agent: "true"
     dnsHostPort:
       enabled: false
     serviceDns:
