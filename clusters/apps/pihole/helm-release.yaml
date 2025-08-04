@@ -16,8 +16,8 @@ spec:
   values:
     replicaCount: 1
     image:
-      repository: nginx
-      tag: "alpine"
+      repository: pihole/pihole
+      tag: "latest"
       pullPolicy: IfNotPresent
     dnsHostPort:
       enabled: false
