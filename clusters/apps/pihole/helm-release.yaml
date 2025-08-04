@@ -28,7 +28,8 @@ spec:
       http:
         enabled: true
         port: 80
-      type: ClusterIP
+        nodePort: 30080
+      type: NodePort
     persistentVolumeClaim:
       enabled: false
     adminPassword: "your-secure-password" # Replace with a strong password
